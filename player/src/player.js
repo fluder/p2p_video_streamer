@@ -7,6 +7,7 @@ import { ChunkServerController } from "./controllers/chunk_server_controller";
 import { HTTPFetcher } from "./fetchers/http_fetcher";
 import { P2PFetcher } from "./fetchers/p2p_fetcher";
 import { RTCPeer } from "./utils/rtc";
+import { StatsController } from "./controllers/stats_controller";
 
 
 export class Player {

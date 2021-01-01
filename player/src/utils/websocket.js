@@ -22,7 +22,6 @@ export class WebsocketClient {
     open() {
         if (this.isOpened)
             throw new WebsocketClientError("Already opened");
-
         return new Promise((resolve, reject) => {
             this._error = undefined;
             this._ws = new WebSocket(this.wsUrl);
@@ -40,7 +39,7 @@ export class WebsocketClient {
                 }
                 this._msgQueue.flush(this._error);
                 this.isOpened = false;
-            }
+            };
         });
     }
 

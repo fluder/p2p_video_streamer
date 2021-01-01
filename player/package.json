@@ -2,7 +2,7 @@
   "name": "p2p_video_player",
   "version": "0.0.1",
   "description": "Video player that uses WebRTC to save bandwidth",
-  "license" : "MIT",
+  "license": "MIT",
   "main": "./dist/player.js",
   "files": [
     "dist"
@@ -13,7 +13,7 @@
     "babel-loader": "^8.2.2",
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "p-cancelable": "^2.0.0",
+    "p-cancelable": "^0.3.0",
     "delay": "^4.4.0",
     "md5": "^2.3.0",
     "uuid": "^8.3.2"

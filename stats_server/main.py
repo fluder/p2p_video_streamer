@@ -5,6 +5,7 @@ from datetime import datetime
 
 import aiohttp
 import aiohttp_jinja2
+import aiohttp_cors
 import jinja2
 from aiohttp import web
 from uuid import uuid4
@@ -84,13 +85,22 @@ async def stat_handler(request):
 
 def main():
     app = web.Application()
+    cors = aiohttp_cors.setup(app, defaults={
+        "*": aiohttp_cors.ResourceOptions(
+            allow_credentials=True,
+            expose_headers="*",
+            allow_headers="*",
+        )
+    })
     aiohttp_jinja2.setup(
         app,
         loader=jinja2.FileSystemLoader("templates")
     )
-    app.router.add_get("/submit", submit_handler)
+    app.router.add_routes([web.get('/submit', submit_handler)])
     app.router.add_get("/get_info", get_info_handler)
     app.router.add_get("/stat", stat_handler)
+    for route in list(app.router.routes()):
+        cors.add(route)
     web.run_app(app, port=80)
 
 

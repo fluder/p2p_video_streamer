@@ -1,3 +1,4 @@
 aiohttp==3.7.3
 trafaret==2.1.0
 aiohttp_jinja2==1.4.2
+aiohttp_cors==0.7.0

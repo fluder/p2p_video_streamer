@@ -15,7 +15,7 @@ export class BufferMetadataController {
 
     play() {
         if (this._promise === undefined) {
-            let promise = this._pollDashUrl()
+            let promise = this._pollDashUrl();
             promise.catch((err) => {
                 if (!promise.canceled) {
                     throw err;
@@ -36,7 +36,7 @@ export class BufferMetadataController {
         return new PCancelable((onCancel, resolve, reject) => {
             let isCanceled = false;
             (async () => {
-                let currentAvailabilityStartTime = undefined;
+                let currentAvailabilityStartTime;
 
                 while (!isCanceled) {
                     try {
@@ -85,7 +85,7 @@ export class BufferMetadataController {
                         console.log("[BufferMetadataController._pollDashUrl()] Error during poll iteration");
                         console.log(err);
                     }
-                    await delay(2000);
+                    await delay(1000);
                 }
             })();
             onCancel(() => { isCanceled = true; });

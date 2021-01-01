@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>P2P Video Streaming example</title>
+    <style>
+        #player {
+            position: relative;
+            width: 800px;
+            height: 600px;
+        }
+
+        .play-button {
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-align: center;
+            background: #ffffff;
+            margin: 150px 286px;
+            padding: 20px;
+        }
+    </style>
+    <script src="js/player.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log(document.getElementById("player"));
+            var player = new Player(
+                document.getElementById("player"),
+                "http://localhost:9999/ts/play/dash/example.mpd",
+                {
+                    statsHost: "localhost:9999/stats",
+                    p2pHost: "localhost:9999/p2p",
+                    p2pRoomId: "example",
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+<div id="player">
+    <video class="video"></video>
+    <div class="loader"></div>
+    <div class="play-button">Play</div>
+    <div class="fullscreen-button"></div>
+</div>
+</body>
+</html>

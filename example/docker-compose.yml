@@ -6,3 +6,34 @@ services:
 
   signaling_server:
     build: ../signaling_server
+
+  ts:
+    build: nginx-ts
+
+  streamer:
+    build: streamer
+    depends_on:
+      - ts
+    links:
+      - ts
+
+  index:
+    build: index
+
+  proxy:
+    build: proxy
+    links:
+      - stats_server
+      - signaling_server
+      - ts
+    environment:
+      SERVER_NAME: localhost:9999
+      SERVICES: >
+        [
+          {"upstream": "ts", "path": "/ts"},
+          {"upstream": "stats_server", "path": "/stats"},
+          {"upstream": "signaling_server", "path": "/p2p"},
+          {"upstream": "index", "path": "/"}
+        ]
+    ports:
+      - 9999:80

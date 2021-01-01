@@ -11,7 +11,7 @@ import { RTCPeerOperationError, RTCPeerOperationTimeout } from "./rtc_errors";
 
 const rtcDefaultConfig = {
     iceServers: [
-        { urls: "stun:stun.l.google.com:19302" }
+        { urls: "stun:stun.sipnet.net:3478" }
     ]
 }, rtcDefaultConnection = {
     optional:
@@ -141,7 +141,9 @@ export class RTCPeer {
     }
 
     _handleSignalingMessage(msg) {
+        console.log(msg);
         if (msg.type == "offer") {
+            console.log("offer!!!");
             let offerId = msg.offer_id,
                 peerId = msg.peer_id,
                 sdp = msg.sdp,
@@ -153,7 +155,7 @@ export class RTCPeer {
                 rtcChannel.dataChannel.onopen = () => {
                     rtcChannel.open();
                     this._channelsQueue.put(rtcChannel);
-                }
+                };
             };
             (async () => {
                 let sdp = await rtcChannel.peerConnection.createAnswer(sdpConstraints);

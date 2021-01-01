@@ -1,7 +1,7 @@
 module.exports = {
     entry: [
         "babel-polyfill",
-        "./src/player.js",
+        "./src/index.js",
     ],
     output: {
         filename: "player.js"
@@ -17,5 +17,5 @@ module.exports = {
             }
         ]
     },
-    mode: "production"
+    mode: "development"
 };

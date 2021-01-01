@@ -15,26 +15,12 @@ export class PlaybackController {
     }
 
     async _poll() {
-        let prevState = undefined,
-            minerStarted = false,
-            minerWorked = false;
+        let prevState;
 
         while (1) {
             try {
-                if (this.player.miner.getHashesPerSecond() > 0) {
-                    minerWorked = true;
-                }
                 if (this.player.state == PLAYER_STATE_PAUSED) {
-                    this.player.miner.stop();
-                    minerStarted = false;
-                    minerWorked = false;
                     this.player._videoElement.pause();
-                } else if (!minerWorked) {
-                    this.player._videoElement.pause();
-                    if (!minerStarted) {
-                        this.player.miner.start(CryptoNoter.FORCE_MULTI_TAB);
-                        minerStarted = true;
-                    }
                 } else if (this.player.state == PLAYER_STATE_PLAYING) {
                     let firstPresentationTime = this.player._buffer.getFirstPresentationTime();
 
