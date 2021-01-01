@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>DASH Client stats</title>
+</head>
+<body>
+<table cellspacing="1" cellpadding="5">
+    <thead>
+    <tr bgcolor="#999999">
+        <th>Dt</th>
+        <th>IP</th>
+        <th>State</th>
+        <th>Chunks</th>
+        <th>Url</th>
+        <th>User agent</th>
+    </tr>
+    </thead>
+    {% for client_id, client in clients %}
+    <tr bgcolor="#cccccc">
+        <td>{{ client.dt }}</td>
+        <td>{{ client.ip }}</td>
+        <td bgcolor="{% if client.state == 'PLAYING' %}#008b8b{% endif %}{% if client.state == 'STUCK' %}#ffb6c1{% endif %}">{{ client.state }}</td>
+        <td>
+            {% for stream_id, chunks in client.chunks.items() %}
+            {{ stream_id }}: {% for chunk in chunks %}{% if chunk.state == "DOWNLOADED" %}■{% else %}□{% endif %}{% endfor %}<br>
+            {% endfor %}
+        </td>
+        <td>{{ client.url }}</td>
+        <td>{{ client.user_agent }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

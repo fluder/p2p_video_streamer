@@ -1,0 +1,8 @@
+version: '3.1'
+
+services:
+  stats_server:
+    build: ../stats_server
+
+  signaling_server:
+    build: ../signaling_server
